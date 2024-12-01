@@ -5,7 +5,7 @@ import LogoIcon from "../LogoIcon";
 import './Settings.css';
 
 const Settings = () => {
-    const [threshold, setThreshold] = useState(5); // Начальное значение 5
+    const [threshold, setThreshold] = useState(3); // Начальное значение 5
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 

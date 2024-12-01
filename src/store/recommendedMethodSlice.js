@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    recommendedMethod: 'SMS', // По умолчанию SMS
+    recommendedMethod: 'QDSToken', // По умолчанию SMS
 };
 
 const recommendedMethodSlice = createSlice({

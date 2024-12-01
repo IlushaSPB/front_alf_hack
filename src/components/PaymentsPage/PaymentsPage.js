@@ -10,8 +10,16 @@ const PaymentsPage = () => {
     const [loadingState, setLoadingState] = useState({}); // Изменяем состояние для каждой кнопки
     const [loadTimeout, setLoadTimeout] = useState(30);
     const [error, setError] = useState(null);
+    const [recommendedMethod, setRecommendedMethodState] = useState(null); // Для хранения рекомендованного метода
+    const [recommendationText, setRecommendationText] = useState(""); // Для текста рекомендации
     const timeoutId = useRef();
     const dispatch = useDispatch();
+
+    const recommendationDict = {
+        QDSToken: "Кэп на токене",
+        PayControl: "Приложение Альфа-Бизнес",
+        QDSMobile: "КЭП в приложении",
+    };
 
     // Маппинг значений для useContext
     const contextValues = {
@@ -60,25 +68,9 @@ const PaymentsPage = () => {
             availableMethods: ["SMS"],
             claims: 9,
         },
-        // change_signature_method: {
-        //     clientId: "4",
-        //     organizationId: "44",
-        //     segment: "Средний бизнес",
-        //     role: "Сотрудник",
-        //     organizations: 6,
-        //     currentMethod: "SMS",
-        //     mobileApp: true,
-        //     signatures: {
-        //         common: { mobile: 13, web: 13 },
-        //         special: { mobile: 11, web: 11 },
-        //     },
-        //     availableMethods: ["SMS"],
-        //     claims: 9,
-        // },
     };
 
     const handleClick = (context) => {
-        // Устанавливаем состояние загрузки только для этой кнопки
         setLoadingState((prevState) => ({
             ...prevState,
             [context]: true,
@@ -92,7 +84,6 @@ const PaymentsPage = () => {
             }));
         }, loadTimeout);
 
-        // Проверка на допустимость контекста
         if (!contextValues[context]) {
             setError("400 Bad Request");
             setLoadingState((prevState) => ({
@@ -102,17 +93,15 @@ const PaymentsPage = () => {
             return;
         }
 
-        // Формируем тело запроса
         const body = contextValues[context];
-        // Используем URL из .env
         const apiUrl = process.env.REACT_APP_API_URL;
-        // Отправляем запрос с нужным контекстом
+
         fetch(`${apiUrl}?useContext=${context}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(body), // Формируем запрос
+            body: JSON.stringify(body),
         })
             .then((response) => {
                 if (!response.ok) {
@@ -121,7 +110,13 @@ const PaymentsPage = () => {
                 return response.json();
             })
             .then((data) => {
-                dispatch(setRecommendedMethod(data.recommendedMethod)); // Сохраняем метод в Redux
+                const method = data.recommendedMethod;
+                if (method === "NoRecommendedMethod") {
+                    return; // Прерываем выполнение дальнейших действий
+                }
+                dispatch(setRecommendedMethod(method)); // Сохраняем метод в Redux
+                setRecommendedMethodState(method); // Обновляем локальное состояние
+                setRecommendationText(recommendationDict[method] || "Не найдено"); // Обновляем текст рекомендации
                 setLoadingState((prevState) => ({
                     ...prevState,
                     [context]: false,
@@ -148,15 +143,22 @@ const PaymentsPage = () => {
             </header>
 
             <div className="content">
-
                 {error && (
                     <Text size="medium" weight="regular" color="danger">
                         Ошибка: {error}
                     </Text>
                 )}
 
+                {/* Отображаем рекомендованный метод, если он есть */}
+                {recommendedMethod && recommendationText && (
+                    <div className="recommendation-card">
+                        <Text size="medium" weight="bold" color="primary">
+                            Рекомендуем вам новый способ подписания: {recommendationText}
+                        </Text>
+                    </div>
+                )}
+
                 <div className="payment-list">
-                    {/* Маппим список подписей */}
                     {Object.keys(contextValues).map((context) => {
                         const data = contextValues[context];
                         return (
@@ -168,8 +170,8 @@ const PaymentsPage = () => {
                                     view="primary"
                                     size="l"
                                     onClick={() => handleClick(context)}
-                                    loading={loadingState[context] || false}  // Используем индивидуальное состояние
-                                    disabled={loadingState[context] || false}  // Кнопка блокируется только для этого контекста
+                                    loading={loadingState[context] || false}
+                                    disabled={loadingState[context] || false}
                                 >
                                     {loadingState[context] ? "Загружается..." : `Подписать`}
                                 </Button>
@@ -177,10 +179,27 @@ const PaymentsPage = () => {
                         );
                     })}
                 </div>
-
             </div>
         </div>
     );
 };
 
 export default PaymentsPage;
+
+
+
+// change_signature_method: {
+//     clientId: "4",
+//     organizationId: "44",
+//     segment: "Средний бизнес",
+//     role: "Сотрудник",
+//     organizations: 6,
+//     currentMethod: "SMS",
+//     mobileApp: true,
+//     signatures: {
+//         common: { mobile: 13, web: 13 },
+//         special: { mobile: 11, web: 11 },
+//     },
+//     availableMethods: ["SMS"],
+//     claims: 9,
+// },
