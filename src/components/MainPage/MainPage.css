@@ -1,0 +1,59 @@
+/* MainPage.css */
+.main-page {
+    padding: 30px;
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.icon-logo {
+    margin-right: 10px;
+    color: #ef3124;
+}
+
+.custom-button {
+    margin-top: 20px;
+}
+
+.text {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #0061f2;
+    text-decoration: none;
+}
+/* Обновленный стиль */
+.content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Отступ сверху, чтобы отделить от шапки */
+}
+
+.button-container {
+    display: flex;
+    gap: 16px; /* Отступ между кнопкой и ссылкой */
+    margin-top: 20px; /* Отступ сверху для кнопки */
+}
+
+.link-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px; /* Отступ снизу для ссылок */
+}
+
+.text {
+    font-size: 16px;
+    line-height: 1.5;
+}

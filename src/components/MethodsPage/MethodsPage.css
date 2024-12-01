@@ -1,0 +1,96 @@
+/* Основные стили для страницы */
+.main-page {
+    padding: 30px;
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Прижимаем к верху */
+    justify-content: flex-start; /* Прижимаем к верху */
+    height: 100vh; /* Высота на всю страницу */
+    overflow: auto; /* Чтобы не вылазить за пределы */
+}
+
+/* Контейнер для логотипа и текста */
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Прижимаем логотип и текст к левому краю */
+    margin-bottom: 30px; /* Отступ снизу */
+}
+
+/* Основной контейнер для карточек */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Центровка карточек по горизонтали */
+    margin-top: 40px; /* Отступ сверху для карточек */
+}
+
+/* Стиль для каждой карточки */
+.method-card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    border: 2px solid red; /* Для теста: все карточки будут красными */
+}
+
+.method-card:hover {
+    transform: translateY(-10px); /* Поднятие карточки при наведении */
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2); /* Увеличение тени при наведении */
+}
+
+/* Стиль для иконок в карточках */
+.method-card svg {
+    fill: #ef3124; /* Цвет иконки */
+    margin-bottom: 15px;
+}
+
+/* Основной текст в карточках */
+.method-card .method-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Подписка к методам */
+.method-card .method-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Стиль для рекомендованных карточек */
+.method-card.recommended {
+    border: 2px solid green; /* Зеленая рамка для рекомендованных */
+}
+.method-card.recommended svg {
+    fill: green; /* Зеленая иконка */
+}
+
+.recommended-text {
+    color: green;
+    font-size: 16px; /* Немного увеличиваем размер */
+    font-weight: 500; /* Чуть жирнее */
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif; /* Можно выбрать шрифт по вкусу */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Нежная тень для текста */
+    line-height: 1.5;
+}
+
+/* Дополнительное выделение текста */
+.recommended-text .highlight {
+    font-weight: bold;
+    color: #2d9e2d;
+}

@@ -1,0 +1,63 @@
+/* src/components/PaymentsPage/PaymentsPage.css */
+.main-page {
+    padding: 30px;
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.payment-list {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;  /* Позволяет карточкам оборачиваться в случае необходимости */
+    gap: 20px;  /* Отступ между карточками */
+    justify-content: flex-start;  /* Карточки выравниваются по левому краю */
+}
+
+.payment-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 250px;  /* Устанавливаем фиксированную ширину для каждой карточки */
+    transition: transform 0.3s;
+    flex-shrink: 0;  /* Предотвращает сжатие карточек */
+}
+
+.payment-item:hover {
+    transform: translateY(-5px);
+}
+
+.payment-header {
+    margin-bottom: 10px;
+}
+
+.payment-header h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.payment-header p {
+    font-size: 14px;
+    color: #666;
+}
+
+.payment-details {
+    margin-bottom: 15px;
+}
+
+.payment-details p {
+    font-size: 14px;
+    color: #666;
+}
+
+.payment-item button {
+    margin-top: 15px;
+}
+
+.link-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}

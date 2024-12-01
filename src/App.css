@@ -1,0 +1,21 @@
+/* App.css */
+.App {
+  display: flex;
+  justify-content: flex-start;
+  height: 100vh;
+}
+
+.content-container {
+  margin-left: 250px; /* Отступ для размещения контента справа от сайдбара */
+  width: calc(100% - 250px); /* Ширина контента, чтобы он занимал оставшееся место */
+  padding: 20px;
+  background-color: #f0f2f5;
+  overflow-y: auto;
+  transition: margin-left 0.3s, width 0.3s;
+}
+
+/* Когда сайдбар свернут, контент будет занимать всю ширину */
+.sidebar.collapsed + .content-container {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+}
