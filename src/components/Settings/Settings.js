@@ -19,7 +19,7 @@ const Settings = () => {
 
         try {
             const apiUrl = process.env.REACT_APP_API_URL;
-            const response = await fetch(`${apiUrl}/${threshold}`, {
+            const response = await fetch(`http://localhost:8080/api/config/counter-reset-threshold/${threshold}`, {
                 method: 'PUT',
             });
 
